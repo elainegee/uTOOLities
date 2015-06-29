@@ -9,12 +9,12 @@ __author__='elainegee'
 
 parser = argparse.ArgumentParser(description='Randomly select lines from a VCF.')
 
-parser.add_argument('-f', '--file', type=argparse.FileType('r'), default=sys.stdin,
+parser.add_argument('-f', '--file', type=argparse.FileType('r'), default=sys.stdin, required=True,
                     help='Input VCF file.')
-parser.add_argument('-o','--output', type=argparse.FileType('w'), default=sys.stdout,
+parser.add_argument('-o','--output', type=argparse.FileType('w'), default=sys.stdout, required=True,
                     help='Output VCF file.')
-parser.add_argument('-n', '--number', type=int, default=1, help='Number of lines randomly'
-                                                                ' selected from input VCF.')
+parser.add_argument('-n', '--number', type=int, default=1, required=True, help='Number of lines randomly'
+                                                                               ' selected from input VCF.')
 args = parser.parse_args()
 
 
