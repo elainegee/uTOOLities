@@ -4,6 +4,7 @@ import sys
 import glob
 import logging
 from datetime import datetime
+import os
 
 def main():
     # Setup logging
@@ -112,10 +113,12 @@ def parseDellyTx(folder):
     :param folder:
     :return:
     '''
+    folder = os.path.abspath(folder)
+    print folder
     #Find VCF in folder
-    for file in glob.glob("*.vcf"):
+    for file in glob.glob(folder + "/*.vcf"):
         logging.info("Parsing '" + file + "'.")
-        outputTable = file[:-4] + ".txt"
+        outputTable =  file[:-4] + ".txt"
         logging.info("Output written to '" + outputTable + "'.")
         txList = []
         with open(file, 'r') as f:
