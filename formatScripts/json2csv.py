@@ -40,19 +40,20 @@ def json_to_csv(jsonFile):
     with open(jsonFile, 'r') as f:
         # Load JSON into a list
         contents = json.load(f, object_hook=ascii_dict_encoding)
-        print contents.keys()
+        logging.info("Keys are: " + str(contents.keys()))
 
     # Write out data
-    print contents
     for varType, varList in contents.iteritems():
         outFilename = os.path.basename(jsonFile)[:-5] + "_" + varType + ".csv"
         outFH = csv.writer(open(outFilename, 'w'))
-        # Write column header
-        outFH.writerow(varList[0].keys()) 
-        for variant in varList:
-            outFH.writerow(variant.values())
-
-        logger.info("\tOutput sent to '" + outFilename + "'") 
+        if len(varList) > 0:
+            # Write column header
+            outFH.writerow(varList[0].keys()) 
+            for variant in varList:
+                outFH.writerow(variant.values())
+        else:
+            outFH.writerow(['No data'])
+        logger.info("Output sent to '" + outFilename + "'") 
  
 if __name__=="__main__":
     main()
