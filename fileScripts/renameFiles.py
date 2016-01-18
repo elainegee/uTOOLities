@@ -31,7 +31,7 @@ def setup_arg_parser():
                         help="Filename header to include when renaming files incrementally by time stamp. "
                              "See option '-i' for starting index.",
                         required=True)
-    parser.add_argument('-i', '--nameIndex', dest="NAMEINDEX",
+    parser.add_argument('-i', '--nameIndex', type=int, dest="NAMEINDEX",
                         help='Starting index by which to increment renamed files [ default = 0 ].', default=0, required=False)
     parser.add_argument('-x', '--extension', dest="FILEEXTENSION", help="Only rename files with this extension [ default = '.*' ].",
                         default=".*", required=False)
@@ -39,8 +39,7 @@ def setup_arg_parser():
 
 def main(folderPath, nameHeader, nameIndex, fileExtension):
     '''Main function to rename files in folder, in order of date modified timestamp.'''
-    print "hello"
-    logger.info("Getting sorted files in folder ...")
+    logger.info("Sorting files in folder ...")
     fileList = sortFilesByTime(folderPath)
     logger.info("Renaming files, with the extension '" + fileExtension + "', incrementally ...")
     renameFiles(fileList, nameHeader, nameIndex, fileExtension)
